@@ -1,12 +1,14 @@
 {
   "version": 2,
-  "dgSpecHash": "/qlHz2QQaVSjUTnrz9ZN6wBOxJmgOFVR4sGPk7GuznDtf89kuxDuMJpyWpip6W2nknYgPrDfzxafxMv5zoPHlg==",
+  "dgSpecHash": "kYdAgBE9FlBKW0VpGlN9mAK2tfOR2D0WBTZU0KvjEk9c+eiadbKeZMihm111DZqvxzZvp+266GHyk9MkWGYZ2w==",
   "success": true,
   "projectFilePath": "D:\\AnguilarTutorial\\AngularASPNetProject\\AnguilarTutorialAPI\\AnguilarTutorialAPI.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\mihai\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
+    "C:\\Users\\mihai\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.1\\automapper.extensions.microsoft.dependencyinjection.12.0.1.nupkg.sha512",
     "C:\\Users\\mihai\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\mihai\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\6.0.21\\microsoft.aspnetcore.authentication.jwtbearer.6.0.21.nupkg.sha512",
-    "C:\\Users\\mihai\\.nuget\\packages\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",
+    "C:\\Users\\mihai\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",
     "C:\\Users\\mihai\\.nuget\\packages\\microsoft.data.sqlite.core\\6.0.20\\microsoft.data.sqlite.core.6.0.20.nupkg.sha512",
     "C:\\Users\\mihai\\.nuget\\packages\\microsoft.entityframeworkcore\\6.0.20\\microsoft.entityframeworkcore.6.0.20.nupkg.sha512",
     "C:\\Users\\mihai\\.nuget\\packages\\microsoft.entityframeworkcore.abstractions\\6.0.20\\microsoft.entityframeworkcore.abstractions.6.0.20.nupkg.sha512",

@@ -8,7 +8,7 @@ namespace AnguilarTutorialAPI.Data
         public DataContext(DbContextOptions options) : base(options)
         {
         }
-
+        
         public virtual DbSet<AppUser> Users { get; set; }
     }
 }

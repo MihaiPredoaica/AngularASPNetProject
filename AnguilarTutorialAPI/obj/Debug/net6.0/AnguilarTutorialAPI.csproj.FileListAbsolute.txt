@@ -140,3 +140,6 @@ D:\AnguilarTutorial\AngularASPNetProject\AnguilarTutorialAPI\obj\Debug\net6.0\re
 D:\AnguilarTutorial\AngularASPNetProject\AnguilarTutorialAPI\obj\Debug\net6.0\AnguilarTutorialAPI.pdb
 D:\AnguilarTutorial\AngularASPNetProject\AnguilarTutorialAPI\obj\Debug\net6.0\AnguilarTutorialAPI.genruntimeconfig.cache
 D:\AnguilarTutorial\AngularASPNetProject\AnguilarTutorialAPI\obj\Debug\net6.0\ref\AnguilarTutorialAPI.dll
+D:\AnguilarTutorial\AngularASPNetProject\AnguilarTutorialApi\bin\Debug\net6.0\Data\UserSeedData.json
+D:\AnguilarTutorial\AngularASPNetProject\AnguilarTutorialAPI\bin\Debug\net6.0\AutoMapper.dll
+D:\AnguilarTutorial\AngularASPNetProject\AnguilarTutorialAPI\bin\Debug\net6.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll

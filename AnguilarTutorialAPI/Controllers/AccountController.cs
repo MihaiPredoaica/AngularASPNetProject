@@ -11,10 +11,12 @@ namespace AnguilarTutorialAPI.Controllers
 {
     public class AccountController : BaseApiController
     {
+        private readonly DataContext _context;
         private ITokenService _tokenService;
 
-        public AccountController(DataContext context, ITokenService tokenService) : base(context)
+        public AccountController(DataContext context, ITokenService tokenService)
         {
+            _context = context;
             _tokenService = tokenService;
         }
 
