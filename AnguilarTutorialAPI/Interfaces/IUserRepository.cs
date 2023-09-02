@@ -9,5 +9,6 @@ namespace AnguilarTutorialAPI.Interfaces
         Task<bool> SaveAllAsync();
         Task<IEnumerable<MemberDTO>> GetMembersAsync();
         Task<MemberDTO> GetMemberAsync(string username);
+        Task<AppUser> GetUserByUsernameAsync(string username);
     }
 }

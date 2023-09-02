@@ -38,8 +38,8 @@ namespace AnguilarTutorialAPI.Controllers
             await _context.SaveChangesAsync();
 
             return new UserDTO 
-            { 
-                UserName = user.UserName, 
+            {
+                Username = user.UserName, 
                 Token = _tokenService.CreateToken(user)
             };
         }
@@ -61,7 +61,7 @@ namespace AnguilarTutorialAPI.Controllers
 
             return new UserDTO
             {
-                UserName = user.UserName,
+                Username = user.UserName,
                 Token = _tokenService.CreateToken(user)
             };
         }

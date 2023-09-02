@@ -24,6 +24,11 @@ namespace AnguilarTutorialAPI.Data.Repositories
             return await _context.Users.FindAsync(id);
         }
 
+        public async Task<AppUser> GetUserByUsernameAsync(string username)
+        {
+            return await _context.Users.SingleOrDefaultAsync(user => user.UserName == username);
+        }
+
         public async Task<bool> SaveAllAsync()
         {
             return await _context.SaveChangesAsync() > 0;
