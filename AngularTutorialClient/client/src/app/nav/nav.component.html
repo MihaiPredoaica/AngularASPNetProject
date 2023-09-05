@@ -34,13 +34,14 @@
     >
       <ul class="navbar-nav mr-auto">
         <li class="nav-item">
-          <a class="nav-link" routerLink="/member/edit">Edit Profile </a>
+          <a class="nav-link ml-2" routerLink="/member/edit">Edit Profile </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" (click)="logout()" href="#">Logout </a>
+          <a class="nav-link ml-2" (click)="logout()" href="#">Logout </a>
         </li>
       </ul>
-      <a class="text-light">Welcome {{ model.username | titlecase }}</a>
+      <img src="{{user.photoUrl}}" alt="{{user.username}}">
+      <a class="text-light ml-2">Welcome {{ model.username | titlecase }}</a>
     </div>
 
     <form
