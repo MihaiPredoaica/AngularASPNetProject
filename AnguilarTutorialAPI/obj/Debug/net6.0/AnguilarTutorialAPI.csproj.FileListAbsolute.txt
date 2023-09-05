@@ -224,3 +224,5 @@ D:\AngularProject\AngularASPNetProject\AnguilarTutorialAPI\obj\Debug\net6.0\Angu
 D:\AngularProject\AngularASPNetProject\AnguilarTutorialAPI\obj\Debug\net6.0\ref\AnguilarTutorialAPI.dll
 D:\AngularProject\AngularASPNetProject\AnguilarTutorialAPI\bin\Debug\net6.0\CloudinaryDotNet.dll
 D:\AngularProject\AngularASPNetProject\AnguilarTutorialAPI\bin\Debug\net6.0\Newtonsoft.Json.dll
+D:\AnguilarTutorial\AngularASPNetProject\AnguilarTutorialAPI\bin\Debug\net6.0\CloudinaryDotNet.dll
+D:\AnguilarTutorial\AngularASPNetProject\AnguilarTutorialAPI\bin\Debug\net6.0\Newtonsoft.Json.dll

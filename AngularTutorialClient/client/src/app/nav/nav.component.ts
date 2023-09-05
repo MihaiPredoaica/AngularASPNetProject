@@ -20,7 +20,9 @@ export class NavComponent implements OnInit {
     private router: Router,
     private toastr: ToastrService
   ) {
-    this.accountService.currentUser$.pipe(take(1)).subscribe(user => this.user = user);
+    this.accountService.currentUser$
+      .pipe(take(1))
+      .subscribe((user) => (this.user = user));
   }
 
   ngOnInit(): void {}
@@ -29,7 +31,6 @@ export class NavComponent implements OnInit {
     this.accountService.login(this.model).subscribe((response) => {
       this.router.navigateByUrl('/members');
     });
-    console.log(this.model);
   }
 
   logout() {
