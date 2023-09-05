@@ -38,4 +38,8 @@ export class MembersService {
       })
     );
   }
+
+  setMainPhoto(memberId: int) {
+    
+  }
 }

@@ -222,3 +222,5 @@ D:\AngularProject\AngularASPNetProject\AnguilarTutorialAPI\obj\Debug\net6.0\scop
 D:\AngularProject\AngularASPNetProject\AnguilarTutorialAPI\obj\Debug\net6.0\AnguilarTutorialAPI.csproj.CopyComplete
 D:\AngularProject\AngularASPNetProject\AnguilarTutorialAPI\obj\Debug\net6.0\AnguilarTutorialAPI.genruntimeconfig.cache
 D:\AngularProject\AngularASPNetProject\AnguilarTutorialAPI\obj\Debug\net6.0\ref\AnguilarTutorialAPI.dll
+D:\AngularProject\AngularASPNetProject\AnguilarTutorialAPI\bin\Debug\net6.0\CloudinaryDotNet.dll
+D:\AngularProject\AngularASPNetProject\AnguilarTutorialAPI\bin\Debug\net6.0\Newtonsoft.Json.dll
