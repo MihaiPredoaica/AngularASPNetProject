@@ -1,5 +1,6 @@
 ﻿using AnguilarTutorialAPI.DTOs;
 using AnguilarTutorialAPI.Entity;
+using AnguilarTutorialAPI.Helpers;
 using AnguilarTutorialAPI.Interfaces;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
@@ -39,11 +40,13 @@ namespace AnguilarTutorialAPI.Data.Repositories
             _context.Entry(user).State = EntityState.Modified;
         }
 
-        public async Task<IEnumerable<MemberDTO>> GetMembersAsync()
+        public async Task<PagedList<MemberDTO>> GetMembersAsync(UserParams userParams)
         {
-            return await _context.Users
+            var query = _context.Users
                     .ProjectTo<MemberDTO>(_mapper.ConfigurationProvider)
-                    .ToListAsync();
+                    .AsNoTracking();
+
+            return await PagedList<MemberDTO>.CreateAsync(query, userParams.PageNumber, userParams.PageSize);
         }
 
         public async Task<MemberDTO> GetMemberAsync(string username)

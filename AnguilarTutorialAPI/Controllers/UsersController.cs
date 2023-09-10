@@ -2,6 +2,7 @@
 using AnguilarTutorialAPI.DTOs;
 using AnguilarTutorialAPI.Entity;
 using AnguilarTutorialAPI.Extensions;
+using AnguilarTutorialAPI.Helpers;
 using AnguilarTutorialAPI.Interfaces;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
@@ -25,9 +26,12 @@ namespace AnguilarTutorialAPI.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<MemberDTO>>> GetUsers()
+        public async Task<ActionResult<IEnumerable<MemberDTO>>> GetUsers([FromQuery]UserParams userParams)
         {
-            var users = await _userRepository.GetMembersAsync();
+            var users = await _userRepository.GetMembersAsync(userParams);
+
+            Response.AddPaginationHeader(users.CurrentPage, users.PageSize, users.TotalCount, users.TotalPages);
+
             return Ok(users);
         }
 

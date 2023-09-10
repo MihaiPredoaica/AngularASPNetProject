@@ -1,5 +1,6 @@
 ﻿using AnguilarTutorialAPI.DTOs;
 using AnguilarTutorialAPI.Entity;
+using AnguilarTutorialAPI.Helpers;
 
 namespace AnguilarTutorialAPI.Interfaces
 {
@@ -7,7 +8,7 @@ namespace AnguilarTutorialAPI.Interfaces
     {
         void Update(AppUser user);
         Task<bool> SaveAllAsync();
-        Task<IEnumerable<MemberDTO>> GetMembersAsync();
+        Task<PagedList<MemberDTO>> GetMembersAsync(UserParams userParams);
         Task<MemberDTO> GetMemberAsync(string username);
         Task<AppUser> GetUserByUsernameAsync(string username);
     }
