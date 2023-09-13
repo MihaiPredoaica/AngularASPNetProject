@@ -22,7 +22,7 @@ namespace AnguilarTutorialAPI.Data.Repositories
 
         public async Task<AppUser> GetUserByIdAsync(int id)
         {
-            return await _context.Users.Include(x => x.Photos).FirstOrDefaultAsync(x => x.Id == id);
+            return await _context.Users.FirstOrDefaultAsync(x => x.Id == id);
         }
 
         public async Task<AppUser> GetUserByUsernameAsync(string username)
@@ -42,11 +42,23 @@ namespace AnguilarTutorialAPI.Data.Repositories
 
         public async Task<PagedList<MemberDTO>> GetMembersAsync(UserParams userParams)
         {
-            var query = _context.Users
-                    .ProjectTo<MemberDTO>(_mapper.ConfigurationProvider)
-                    .AsNoTracking();
+            var minDob = DateTime.Today.AddYears(-userParams.MaxAge - 1);
+            var maxDob = DateTime.Today.AddYears(-userParams.MinAge);
 
-            return await PagedList<MemberDTO>.CreateAsync(query, userParams.PageNumber, userParams.PageSize);
+            var query = _context.Users.AsQueryable()
+                .Where(u => u.UserName != userParams.CurrentUsername
+                    && u.Gender == userParams.Gender
+                    && u.DateOfBirth >= minDob
+                    && u.DateOfBirth <= maxDob);
+
+            query = userParams.OrderBy switch
+            {
+                "created" => query.OrderByDescending(u => u.Created),
+                _ => query.OrderByDescending(u => u.LastActive)
+            };
+                
+
+            return await PagedList<MemberDTO>.CreateAsync(query.ProjectTo<MemberDTO>(_mapper.ConfigurationProvider).AsNoTracking(), userParams.PageNumber, userParams.PageSize);
         }
 
         public async Task<MemberDTO> GetMemberAsync(string username)

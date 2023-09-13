@@ -2,7 +2,7 @@
 {
     public class PaginationHeader
     {
-        public PaginationHeader(int currentPage, int totalPages, int pageSize, int totalCount)
+        public PaginationHeader(int currentPage, int pageSize, int totalCount, int totalPages)
         {
             CurrentPage = currentPage;
             TotalPages = totalPages;

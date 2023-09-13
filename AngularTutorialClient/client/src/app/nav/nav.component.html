@@ -40,8 +40,8 @@
           <a class="nav-link ml-2" (click)="logout()" href="#">Logout </a>
         </li>
       </ul>
-      <img src='{{user.photoUrl || "./assets/user.png"}}' alt="{{user.username}}">
-      <a class="text-light ml-2">Welcome {{ model.username | titlecase }}</a>
+      <img src='{{user?.photoUrl || "./assets/user.png"}}' alt="{{user.username}}">
+      <a class="text-light ml-2">Welcome {{ user.knownAs | titlecase }}</a>
     </div>
 
     <form

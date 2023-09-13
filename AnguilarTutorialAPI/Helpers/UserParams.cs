@@ -12,5 +12,12 @@ namespace AnguilarTutorialAPI.Helpers
             get { return _pageSize; }
             set { _pageSize = value > MaxPageSize ? MaxPageSize : value; }
         }
+
+        public string CurrentUsername { get; set; }
+        public string Gender { get; set; }
+        public int MinAge { get; set; } = 18;
+        public int MaxAge { get; set; } = Int32.MaxValue;
+        public string OrderBy { get; set; } = "lastActive";
+
     }
 }

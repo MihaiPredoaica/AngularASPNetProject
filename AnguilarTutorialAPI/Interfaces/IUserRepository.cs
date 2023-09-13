@@ -11,5 +11,6 @@ namespace AnguilarTutorialAPI.Interfaces
         Task<PagedList<MemberDTO>> GetMembersAsync(UserParams userParams);
         Task<MemberDTO> GetMemberAsync(string username);
         Task<AppUser> GetUserByUsernameAsync(string username);
+        Task<AppUser> GetUserByIdAsync(int id);
     }
 }
