@@ -20,6 +20,11 @@
             >Messages
           </a>
         </li>
+        <li class="nav-item" *appHasRole="['Admin', 'Moderator']">
+          <a class="nav-link" routerLink="/admin" routerLinkActive="active"
+            >Admin
+          </a>
+        </li>
       </ng-container>
       <li class="nav-item">
         <a class="nav-link" routerLink="/errors" routerLinkActive="active"
@@ -40,8 +45,13 @@
           <a class="nav-link ml-2" (click)="logout()" href="#">Logout </a>
         </li>
       </ul>
-      <img src='{{user?.photoUrl || "./assets/user.png"}}' alt="{{user?.username}}">
-      <a class="text-light ml-2">Welcome {{ user.knownAs | titlecase }}</a>
+      <img
+        src="{{ user?.photoUrl || './assets/user.png' }}"
+        alt="{{ user?.username }}"
+      />
+      <a class="text-light ml-2"
+        >Welcome {{ user.knownAs || user.username | titlecase }}</a
+      >
     </div>
 
     <form
