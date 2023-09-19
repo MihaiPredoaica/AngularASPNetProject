@@ -3,6 +3,7 @@ using AnguilarTutorialAPI.Data.Repositories;
 using AnguilarTutorialAPI.Helpers;
 using AnguilarTutorialAPI.Interfaces;
 using AnguilarTutorialAPI.Services;
+using AnguilarTutorialAPI.SignalR;
 using Microsoft.EntityFrameworkCore;
 
 namespace AnguilarTutorialAPI.Extensions
@@ -11,6 +12,7 @@ namespace AnguilarTutorialAPI.Extensions
     {
         public static IServiceCollection AddApplicationServices(this IServiceCollection services, IConfiguration config)
         {
+            services.AddSingleton<PresenceTracker>();
             services.Configure<CloudinarySettings>(config.GetSection("CloudinarySettings"));
             services.AddScoped<ITokenService, TokenService>();
             services.AddScoped<IPhotoService, PhotoService>();

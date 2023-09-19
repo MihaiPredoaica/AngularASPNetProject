@@ -8,6 +8,7 @@ using AnguilarTutorialAPI.Extensions;
 using AnguilarTutorialAPI.Interfaces;
 using AnguilarTutorialAPI.Middleware;
 using AnguilarTutorialAPI.Services;
+using AnguilarTutorialAPI.SignalR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -35,6 +36,7 @@ namespace AnguilarTutorialAPI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddApplicationServices(_config);
+            services.AddSignalR();
             services.AddControllers();
             services.AddCors();
             services.AddSwaggerGen(c =>
@@ -80,7 +82,7 @@ namespace AnguilarTutorialAPI
 
             app.UseRouting();
 
-            app.UseCors(x => x.AllowAnyHeader().AllowAnyMethod().WithOrigins("https://localhost:4200"));
+            app.UseCors(x => x.AllowAnyHeader().AllowAnyMethod().AllowCredentials().WithOrigins("https://localhost:4200"));
 
             app.UseAuthentication();
 
@@ -89,6 +91,8 @@ namespace AnguilarTutorialAPI
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapHub<PresenceHub>("hubs/presence");
+                endpoints.MapHub<MessageHub>("hubs/message");
             });
         }
     }

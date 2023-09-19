@@ -227,3 +227,4 @@ D:\AnguilarTutorial\AngularASPNetProject\AnguilarTutorialAPI\obj\Debug\net6.0\re
 D:\AnguilarTutorial\AngularASPNetProject\AnguilarTutorialAPI\obj\Debug\net6.0\AnguilarTutorialAPI.pdb
 D:\AnguilarTutorial\AngularASPNetProject\AnguilarTutorialAPI\obj\Debug\net6.0\AnguilarTutorialAPI.genruntimeconfig.cache
 D:\AnguilarTutorial\AngularASPNetProject\AnguilarTutorialAPI\obj\Debug\net6.0\ref\AnguilarTutorialAPI.dll
+D:\AngularProject\AngularASPNetProject\AnguilarTutorialAPI\bin\Debug\net6.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll

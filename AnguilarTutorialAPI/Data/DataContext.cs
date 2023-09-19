@@ -14,7 +14,8 @@ namespace AnguilarTutorialAPI.Data
         
         public virtual DbSet<UserLike> Likes { get; set; }
         public virtual DbSet<Message> Messages { get; set; }
-
+        public virtual DbSet<Group> Groups { get; set; }
+        public virtual DbSet<Connection> Connections { get; set; }
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
