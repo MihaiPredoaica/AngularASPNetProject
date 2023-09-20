@@ -61,32 +61,30 @@ namespace AnguilarTutorialAPI.Data.Repositories
         {
             var query = _context.Messages
                 .OrderByDescending(m => m.MessageSent)
+                .ProjectTo<MessageDTO>(_mapper.ConfigurationProvider)
                 .AsQueryable();
             query = messageParams.Container switch
             {
-                "Inbox" => query.Where(u => u.Recipient.UserName == messageParams.Username && !u.RecipientDeleted),
-                "Outbox" => query.Where(u => u.Sender.UserName == messageParams.Username && !u.SenderDeleted),
-                _ => query.Where(u => u.Recipient.UserName == messageParams.Username && u.DateRead == null && !u.RecipientDeleted)
+                "Inbox" => query.Where(u => u.RecipientUsername == messageParams.Username && !u.RecipientDeleted),
+                "Outbox" => query.Where(u => u.SenderUsername == messageParams.Username && !u.SenderDeleted),
+                _ => query.Where(u => u.RecipientUsername == messageParams.Username && u.DateRead == null && !u.RecipientDeleted)
             };
 
-            var messages = query.ProjectTo<MessageDTO>(_mapper.ConfigurationProvider);
-
-            return await PagedList<MessageDTO>.CreateAsync(messages, messageParams.PageNumber, messageParams.PageSize);
+            return await PagedList<MessageDTO>.CreateAsync(query, messageParams.PageNumber, messageParams.PageSize);
         }
 
         public async Task<IEnumerable<MessageDTO>> GetMessageThread(string currentUserName, string recipientUserName)
         {
             var messages = await _context.Messages
-                .Include(u => u.Sender).ThenInclude(p => p.Photos)
-                .Include(u => u.Recipient)
                 .Where(m => (m.Recipient.UserName == currentUserName
                          && m.Sender.UserName == recipientUserName && !m.RecipientDeleted) ||
                          (m.Recipient.UserName == recipientUserName
                          && m.Sender.UserName == currentUserName && !m.SenderDeleted))
                 .OrderBy(m => m.MessageSent)
+                .ProjectTo<MessageDTO>(_mapper.ConfigurationProvider)
                 .ToListAsync();
 
-            var unreadMessages = messages.Where(m => m.DateRead == null && m.Recipient.UserName == currentUserName)?.ToList();
+            var unreadMessages = messages.Where(m => m.DateRead == null && m.RecipientUsername == currentUserName)?.ToList();
 
             if (unreadMessages.Any())
             {
@@ -94,21 +92,14 @@ namespace AnguilarTutorialAPI.Data.Repositories
                 {
                     message.DateRead = DateTime.UtcNow;
                 }
-
-                await _context.SaveChangesAsync();
             }
 
-            return _mapper.Map<IEnumerable<MessageDTO>>(messages);
+            return messages;
         }
         
         public void RemoveConnection(Connection connection)
         {
             _context.Connections.Remove(connection);
-        }
-
-        public async Task<bool> SaveAllAsync()
-        {
-            return await _context.SaveChangesAsync() > 0;
         }
     }
 }

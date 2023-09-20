@@ -14,13 +14,13 @@ namespace AnguilarTutorialAPI.Controllers
 {
     public class UsersController : BaseApiController
     {
-        private readonly IUserRepository _userRepository;
+        private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
         private readonly IPhotoService _photoService;
 
-        public UsersController(IUserRepository userRepository, IMapper mapper, IPhotoService photoService)
+        public UsersController(IUnitOfWork unitOfWork, IMapper mapper, IPhotoService photoService)
         {
-            _userRepository = userRepository;
+            _unitOfWork = unitOfWork;
             _mapper = mapper;
             _photoService = photoService;
         }
@@ -28,14 +28,14 @@ namespace AnguilarTutorialAPI.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<MemberDTO>>> GetUsers([FromQuery]UserParams userParams)
         {
-            var user = await _userRepository.GetUserByUsernameAsync(User.GetUsername());
+            var gender = await _unitOfWork.UserRepository.GetUserGender(User.GetUsername());
             userParams.CurrentUsername = User.GetUsername();
 
             if(string.IsNullOrWhiteSpace(userParams.Gender)) {
-                userParams.Gender = user.Gender == "male" ? "female" : "male";
+                userParams.Gender = gender == "male" ? "female" : "male";
             }
 
-            var users = await _userRepository.GetMembersAsync(userParams);
+            var users = await _unitOfWork.UserRepository.GetMembersAsync(userParams);
 
             Response.AddPaginationHeader(users.CurrentPage, users.PageSize, users.TotalCount, users.TotalPages);
 
@@ -45,18 +45,18 @@ namespace AnguilarTutorialAPI.Controllers
         [HttpGet("{username}", Name = "GetUser")]
         public async Task<ActionResult<MemberDTO>> GetUser(string username)
         {
-            return await _userRepository.GetMemberAsync(username);
+            return await _unitOfWork.UserRepository.GetMemberAsync(username);
         }
 
         [HttpPut]
         public async Task<ActionResult> UpdateUser(MemberUpdateDTO memberUpdateDTO)
         {
-            var user = await _userRepository.GetUserByUsernameAsync(User.GetUsername());
+            var user = await _unitOfWork.UserRepository.GetUserByUsernameAsync(User.GetUsername());
 
             _mapper.Map(memberUpdateDTO, user);
 
-            _userRepository.Update(user);
-            if(await _userRepository.SaveAllAsync()) return NoContent();
+            _unitOfWork.UserRepository.Update(user);
+            if(await _unitOfWork.Complete()) return NoContent();
 
             return BadRequest("Failed to update user");
         }
@@ -64,7 +64,7 @@ namespace AnguilarTutorialAPI.Controllers
         [HttpPost("add-photo")]
         public async Task<ActionResult<PhotoDTO>> AddPhoto(IFormFile file)
         {
-            var user = await _userRepository.GetUserByUsernameAsync(User.GetUsername());
+            var user = await _unitOfWork.UserRepository.GetUserByUsernameAsync(User.GetUsername());
 
             var result = await _photoService.AddPhotoAsync(file);
 
@@ -83,7 +83,7 @@ namespace AnguilarTutorialAPI.Controllers
 
             user.Photos.Add(photo);
 
-            if (await _userRepository.SaveAllAsync())
+            if (await _unitOfWork.Complete())
             {
                 return CreatedAtRoute("GetUser", new { username = user.UserName }, _mapper.Map<PhotoDTO>(photo));
             }
@@ -94,7 +94,7 @@ namespace AnguilarTutorialAPI.Controllers
         [HttpPut("set-main-photo/{photoId}")]
         public async Task<ActionResult> SetMainPhoto(int photoId)
         {
-            var user = await _userRepository.GetUserByUsernameAsync(User.GetUsername());
+            var user = await _unitOfWork.UserRepository.GetUserByUsernameAsync(User.GetUsername());
 
             var photo = user.Photos.FirstOrDefault(p => p.Id == photoId);
 
@@ -112,7 +112,7 @@ namespace AnguilarTutorialAPI.Controllers
 
             photo.IsMain = true;
 
-            if(await _userRepository.SaveAllAsync())
+            if(await _unitOfWork.Complete())
             {
                 return NoContent();
             }
@@ -123,7 +123,7 @@ namespace AnguilarTutorialAPI.Controllers
         [HttpDelete("delete-photo/{photoId}")]
         public async Task<ActionResult> DeletePhoto(int photoId)
         {
-            var user = await _userRepository.GetUserByUsernameAsync(User.GetUsername());
+            var user = await _unitOfWork.UserRepository.GetUserByUsernameAsync(User.GetUsername());
 
             var photo = user.Photos.FirstOrDefault(x => x.Id == photoId);
 
@@ -138,7 +138,7 @@ namespace AnguilarTutorialAPI.Controllers
             }
 
             user.Photos.Remove(photo);
-            if (await _userRepository.SaveAllAsync()) return Ok();
+            if (await _unitOfWork.Complete()) return Ok();
 
             return BadRequest("Failed to delete the photo");
         }

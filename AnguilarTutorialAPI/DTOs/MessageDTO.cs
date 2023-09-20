@@ -1,4 +1,5 @@
 ﻿using AnguilarTutorialAPI.Entity;
+using System.Text.Json.Serialization;
 
 namespace AnguilarTutorialAPI.DTOs
 {
@@ -14,5 +15,10 @@ namespace AnguilarTutorialAPI.DTOs
         public string Content { get; set; }
         public DateTime? DateRead { get; set; }
         public DateTime MessageSent { get; set; }
+
+        [JsonIgnore]
+        public bool SenderDeleted { get; set; }
+        [JsonIgnore]
+        public bool RecipientDeleted { get; set; }
     }
 }
